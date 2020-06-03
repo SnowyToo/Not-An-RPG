@@ -21,11 +21,11 @@ public class Interaction : MonoBehaviour
 
     public virtual void Interact()
     {
-        //Interaction start
+        //Start Interaction
     }
 
     public virtual void Interupt()
     {
-        //Interaction stop
+        //Stop Interaction
     }
 }

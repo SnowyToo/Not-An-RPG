@@ -2388,7 +2388,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 231074700}
   m_HandleRect: {fileID: 231074699}
   m_Direction: 0
-  m_Value: 0.99999976
+  m_Value: 0.9999995
   m_Size: 0.53657144
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15504,6 +15504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: 
+  requiresWalking: 0
   parent: {fileID: 0}
   examineText: A generic triangle NPC
 --- !u!114 &1253271607
@@ -15519,6 +15520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: 
+  requiresWalking: 1
   parent: {fileID: 0}
   dialogue: {fileID: 4900000, guid: f2b0ce941053dba40adef7d404bd2a47, type: 3}
 --- !u!1 &1270628973
@@ -27638,6 +27640,8 @@ MonoBehaviour:
   - {fileID: 376027538}
   skillTab: {fileID: 1999502826}
   clickMenuPrefab: {fileID: 2793872016538160627, guid: 8d0e52f3cc2a77e45acd7d8ce1b80690,
+    type: 3}
+  clickMenuButton: {fileID: 7360089774198460189, guid: 57fbc57ed1ccec045adb5b8f1a1a24ba,
     type: 3}
 --- !u!114 &1617017546
 MonoBehaviour:

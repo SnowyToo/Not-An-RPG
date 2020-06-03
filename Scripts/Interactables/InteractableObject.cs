@@ -20,18 +20,18 @@ public class InteractableObject : MonoBehaviour
 
     public void Interact(Interaction action)
     {
+        isInteracting = true;
         current = action;
         action.Interact();
-        isInteracting = true;
     }
 
     public void Interupt()
     {
         if(isInteracting)
         {
+            isInteracting = false;
             current.Interupt();
             current = null;
-            isInteracting = false;
         }
     }
 }

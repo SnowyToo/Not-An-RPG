@@ -26,13 +26,27 @@ public class NPC_Talk : Interaction
     public override void Interact()
     {
         base.Interact();
+        StartCoroutine(WalkAndTalk());
+    }
 
-        GameManager.dialogueManager.StartDialogue(dialogue);
+    //Walk to NPC and talk to it
+    private IEnumerator WalkAndTalk()
+    {
+        GameManager.playerMovement.GetPath(parent.transform.position);
+        while (!GameManager.playerMovement.MoveToInteract(parent) && parent.isInteracting) //Walk up to the spot
+        {
+            yield return null;
+        }
+        if (parent.isInteracting)
+        {
+            GameManager.dialogueManager.StartDialogue(dialogue);
+        }
     }
 
     public override void Interupt()
     {
         base.Interupt();
+        StopCoroutine(WalkAndTalk());
         GameManager.dialogueManager.StopDialogue();
     }
 }

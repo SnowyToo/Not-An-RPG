@@ -9,11 +9,11 @@ public class ClickManager : MonoBehaviour
 
     
     private InteractableObject lastClicked;
+    private bool isInteracting;
 
     // Update is called once per frame
     private void Update()
     {
-        
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             Camera cam = GameManager.cam;
@@ -21,24 +21,29 @@ public class ClickManager : MonoBehaviour
             cam.orthographicSize -= Input.GetAxisRaw("Mouse ScrollWheel");
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 3, 10);
 
-            if (Input.GetMouseButtonDown(0)) //Left click == Primary interact.
+            if (Input.GetMouseButtonDown(0)) //Left click == Move or Interact
             {
+                Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 //If we're interacting, we want to stop interacting.
-                if (lastClicked != null)
+                if (isInteracting)
                 {
+                    isInteracting = false;
                     lastClicked.Interupt();
                 }
-                GameObject c = Instantiate(click, cam.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward, Quaternion.identity);
+                GameObject c = Instantiate(click, mousePos + Vector3.forward, Quaternion.identity);
 
 
-                //Set up interaction to be passed.
+                //If we click an object, interact with it.
                 lastClicked = ClickedObject();
-                Interaction passedInteraction = null;
                 if (lastClicked != null)
-                    passedInteraction = lastClicked.interactions[0];
-
-                //Walk towards appropriate tile.
-                GameManager.playerMovement.GetPath(lastClicked, passedInteraction);
+                {
+                    lastClicked.Interact(lastClicked.interactions[0]);
+                    isInteracting = true;
+                }
+                else //Otherwise, walk to the tile.
+                {
+                    GameManager.playerMovement.GetPath(mousePos);
+                }
             }
             else if(Input.GetMouseButtonDown(1)) //Right click == Menu dropdown
             {

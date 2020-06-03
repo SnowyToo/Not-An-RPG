@@ -25,24 +25,17 @@ public class PlayerMovement : Pathfinding
 
     private void Update()
     {
-        if(path != null)
+        //If we have a path, start moving.
+        if (path != null)
         {
             Move();
         }
     }
 
     //Get the path
-    public void GetPath(InteractableObject target, Interaction action)
+    public void GetPath(Vector3 rawDestination)
     {
-        obj = target;
-        interaction = action;
-
-        if (target != null)
-            objectPosition = GetGridPosition(target.transform.position);
-
         Vector3Int start = GetGridPosition(player.position);
-
-        Vector3 rawDestination = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int destination = GetGridPosition(rawDestination);
 
         //Make sure pathfinding doesn't get interrupted for null paths.
@@ -58,26 +51,28 @@ public class PlayerMovement : Pathfinding
     //Move the player
     private void Move()
     {
-        if(obj != null && nextTile == GetGridPosition(objectPosition)) //If next tile is interactable, interact.
-        {
-            obj.Interact(interaction);
-            path = null;
-        }
-        else
-        {
-            player.position = Vector3.MoveTowards(player.position, nextTile, speed * Time.deltaTime);
+        player.position = Vector3.MoveTowards(player.position, nextTile, speed * Time.deltaTime);
 
-            float distance = Vector3.Distance(nextTile, player.position);
-            if (distance == 0f)
+        float distance = Vector3.Distance(nextTile, player.position);
+        if (distance == 0f)
+        {
+            if(path.Count > 0) //Check if final tile
             {
-                if(path.Count > 0) //Check if final tile
-                {
-                    nextTile = path.Pop();
-                    return;
-                }
-                path = null; //End of Path
+                nextTile = path.Pop();
+                return;
             }
+            path = null; //End of Path
         }
+    }
+
+    public bool MoveToInteract(InteractableObject o)
+    {
+        if (nextTile == GetGridPosition(o.transform.position))
+        {
+            path = null;
+            return true;
+        }
+        return false;
     }
 
     private Vector3Int GetGridPosition(Vector3 pos)

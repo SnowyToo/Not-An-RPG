@@ -92,8 +92,9 @@ public class UIManager : MonoBehaviour
         {
             Button b = Instantiate(clickMenuButton, menu.transform).GetComponent<Button>();
             //Set text to action name
-            b.onClick.AddListener(i.action);
-            b.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = i.actionName;
+            b.onClick.AddListener(delegate { obj.Interact(i); });
+            b.onClick.AddListener(delegate { menu.GetComponent<RightClickMenu>().DoAction(); });
+            b.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = obj.name + ": " + i.actionName;
         }
     }
 }

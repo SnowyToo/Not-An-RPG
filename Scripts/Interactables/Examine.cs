@@ -16,5 +16,6 @@ public class Examine : Interaction
     {
         base.Interact();
         Debug.Log(examineText);
+        parent.Interupt();
     }
 }

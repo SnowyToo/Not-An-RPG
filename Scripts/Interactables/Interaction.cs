@@ -11,14 +11,6 @@ public class Interaction : MonoBehaviour
     [HideInInspector]
     public InteractableObject parent;
 
-    [HideInInspector]
-    public UnityAction action;
-
-    public void Awake()
-    {
-        action += Interact;
-    }
-
     public virtual void Interact()
     {
         //Start Interaction

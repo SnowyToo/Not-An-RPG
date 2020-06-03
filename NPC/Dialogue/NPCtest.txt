@@ -1,0 +1,33 @@
+
+--- LOOP ---
+Hello
+
+[if Quest(name).state == 0, then => TRY_QUEST]
+[if Quest(name).state == 1, then => FINISH_QUEST]
+
+Already started quest!
+[=> LOOP]
+
+
+
+--- TRY_QUEST ---
+You seem in dire need of a quest!
+
+[if Quest(name).canStart, then => START_QUEST]
+
+But you suck with bows, dude. You need Archery 2 to start this quest!
+[=> LOOP]
+
+
+
+--- START_QUEST ---
+Accept this one, O' humble archer!
+
+[Quest(name).Start]
+[=> LOOP]
+
+--- FINISH_QUEST ---
+
+That was all, humble quester! Take this reward!
+
+[Quest(name).Finish]

@@ -32,9 +32,10 @@ public class PlayerMovement : Pathfinding
     }
 
     //Get the path
-    public void GetPath(InteractableObject target)
+    public void GetPath(InteractableObject target, Interaction action)
     {
         obj = target;
+        interaction = action;
 
         if (target != null)
             objectPosition = GetGridPosition(target.transform.position);

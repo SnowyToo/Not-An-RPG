@@ -33,15 +33,12 @@ public class ClickManager : MonoBehaviour
 
                 //Set up interaction to be passed.
                 lastClicked = ClickedObject();
+                Interaction passedInteraction = null;
                 if (lastClicked != null)
-                    lastClicked.interactions[0].Interact();
-                else
-                {
-
-                }
+                    passedInteraction = lastClicked.interactions[0];
 
                 //Walk towards appropriate tile.
-                GameManager.playerMovement.GetPath(lastClicked);
+                GameManager.playerMovement.GetPath(lastClicked, passedInteraction);
             }
             else if(Input.GetMouseButtonDown(1)) //Right click == Menu dropdown
             {

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public bool doesStartFresh;
 
     public static PlayerStats stats;
+    public static Inventory inv;
     public static UIManager uiManager;
     public static ClickManager clickManager;
     public static PlayerMovement playerMovement;
@@ -25,9 +26,10 @@ public class GameManager : MonoBehaviour
         dialogueManager = GetComponent<DialogueManager>();
         questManager = GetComponent<QuestManager>();
 
+
         //Load stats
-        if (SaveManager.LoadStats() != null && !doesStartFresh)
-            stats = SaveManager.LoadStats();
+        if (SaveManager.Load<PlayerStats>() != null && !doesStartFresh)
+            stats = SaveManager.Load<PlayerStats>();
         else
             stats = new PlayerStats();
 

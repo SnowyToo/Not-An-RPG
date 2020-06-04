@@ -4,39 +4,32 @@ using UnityEngine;
 
 public static class SaveManager
 {
-    public static void SaveStats(PlayerStats stats)
+    public static void Save<T>(T save)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/player.bin";
+        string path = Application.persistentDataPath + "/" + typeof(T).ToString() + ".bin";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        formatter.Serialize(stream, stats);
+        formatter.Serialize(stream, save);
         stream.Close();
     }
 
-    public static void SaveStats()
+    public static T Load<T>()
     {
-        PlayerStats stats = new PlayerStats();
-        SaveStats(stats);
-    }
-
-    public static PlayerStats LoadStats()
-    {
-        string path = Application.persistentDataPath + "/player.bin";
+        string path = Application.persistentDataPath + "/" + typeof(T).ToString() + ".bin";
         if(File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerStats stats = formatter.Deserialize(stream) as PlayerStats;
+            T stats = (T)formatter.Deserialize(stream);
             stream.Close();
             return stats;
         }
         else
         {
-            Debug.LogError("Save file not found in: " + path);
-            return null;
+            throw new System.Exception("Save file not found in: " + path);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -29,7 +30,8 @@ public static class SaveManager
         }
         else
         {
-            throw new System.Exception("Save file not found in: " + path);
+            Debug.LogError("Save file not found in: " + path);
+            return default;
         }
     }
 }

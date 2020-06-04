@@ -11,11 +11,11 @@ public class InteractableObject : MonoBehaviour
 
     public Interaction current;
 
-    public void Awake()
+    public virtual void Awake()
     {
         foreach(Interaction i in interactions)
         {
-            i.parent = this;
+            i.SetParent(this);
         }
     }
 

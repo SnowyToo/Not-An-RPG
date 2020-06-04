@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSlot
+public class ItemStack
 {
     public Item obj;
     public int count;
 
+    public ItemStack()
+    {
+        obj = null;
+        count = 0;
+    }
+
     public void AddItem(Item o, int amount)
     {
-        if (obj != null || !(obj == o && o.isStackable))
-            return;
-
         obj = o;
         count += amount;
-        //Remove from cursor.
     }
 }

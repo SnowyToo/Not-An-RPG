@@ -2,19 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
-    public Item[] items = new Item[20];
-    
-    // Start is called before the first frame update
-    void Start()
+    public ItemStack[] items;
+
+    public Inventory()
     {
-        
+        items = new ItemStack[20];
+        for(int i = 0; i < items.Length; i++)
+        {
+            items[i] = new ItemStack();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    //Add item at the end of the inventory.
+    public void AddItem(Item item, int count)
     {
-        
+        for(int i = 0; i < items.Length; i++)
+        {
+            if (items[i].obj == null || (items[i].obj == item && items[i].obj.isStackable))
+            {
+                items[i].AddItem(item, count);
+                GameManager.uiManager.UpdateInventory();
+                return;
+            }
+        }
+        throw new System.Exception("No room in inventory");
     }
 }

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static PlayerStats stats;
     public static Inventory inv;
+
     public static UIManager uiManager;
     public static ClickManager clickManager;
     public static PlayerMovement playerMovement;
@@ -27,11 +28,17 @@ public class GameManager : MonoBehaviour
         questManager = GetComponent<QuestManager>();
 
 
-        //Load stats
+        //Loading stats
         if (SaveManager.Load<PlayerStats>() != null && !doesStartFresh)
             stats = SaveManager.Load<PlayerStats>();
         else
+        {
             stats = new PlayerStats();
+            SaveManager.Save(stats);
+        }
+
+        //Load Inventory
+        inv = new Inventory();
 
         debug = stats;
     }

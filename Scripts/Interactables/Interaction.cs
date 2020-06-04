@@ -20,4 +20,9 @@ public class Interaction : MonoBehaviour
     {
         //Stop Interaction
     }
+
+    public virtual void SetParent(InteractableObject _parent)
+    {
+        parent = _parent;
+    }
 }

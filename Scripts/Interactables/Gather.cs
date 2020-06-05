@@ -9,11 +9,11 @@ public class Gather : Interaction
     private void Start()
     {
         actionName = "Gather";
+        requiresMovement = true;
     }
 
-    public override void Interact()
+    public override void Act()
     {
-        base.Interact();
         Debug.Log("Gathered");
     }
 }

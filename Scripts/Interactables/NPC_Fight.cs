@@ -10,9 +10,8 @@ public class NPC_Fight : Interaction
         actionName = "Fight";
     }
 
-    public override void Interact()
+    public override void Act()
     {
-        base.Interact();
         Debug.Log("Fighting");
     }
 }

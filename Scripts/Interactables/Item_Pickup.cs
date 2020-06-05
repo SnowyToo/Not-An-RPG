@@ -10,6 +10,7 @@ public class Item_Pickup : Interaction
     private void Start()
     {
         actionName = "Pick Up";
+        requiresMovement = true;
     }
 
     private void Update()
@@ -20,10 +21,11 @@ public class Item_Pickup : Interaction
         }
     }
 
-    public override void Interact()
+    public override void Act()
     {
-        base.Interact();
-        StartCoroutine(WalkAndTalk());
+        GameManager.inv.AddItem(item, 1);
+        Destroy(parent.gameObject);
+        parent.Interupt();
     }
 
     public override void SetParent(InteractableObject _parent)
@@ -32,25 +34,9 @@ public class Item_Pickup : Interaction
         item = _parent as Item;
     }
 
-    //Walk to NPC and talk to it
-    private IEnumerator WalkAndTalk()
-    {
-        GameManager.playerMovement.GetPath(parent.transform.position);
-        while (!GameManager.playerMovement.MoveToInteract(parent) && parent.isInteracting) //Walk up to the spot
-        {
-            yield return null;
-        }
-        if (parent.isInteracting)
-        {
-            GameManager.inv.AddItem(item, 1);
-            Destroy(parent.gameObject);
-        }
-    }
-
     public override void Interupt()
     {
         base.Interupt();
-        StopCoroutine(WalkAndTalk());
         GameManager.dialogueManager.StopDialogue();
     }
 }

@@ -12,9 +12,8 @@ public class Examine : Interaction
         actionName = "Examine";
     }
 
-    public override void Interact()
+    public override void Act()
     {
-        base.Interact();
         Debug.Log(examineText);
         parent.Interupt();
     }

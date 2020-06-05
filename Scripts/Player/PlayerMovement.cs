@@ -65,7 +65,7 @@ public class PlayerMovement : Pathfinding
         }
     }
 
-    public bool MoveToInteract(InteractableObject o)
+    public bool IsNextToObject(InteractableObject o)
     {
         if (nextTile == GetGridPosition(o.transform.position))
         {

@@ -13,10 +13,15 @@ public class InteractableObject : MonoBehaviour
 
     public virtual void Awake()
     {
-        foreach(Interaction i in interactions)
+        foreach (Interaction i in interactions)
         {
             i.SetParent(this);
         }
+    }
+
+    public void Start()
+    {
+        GameManager.tilemapManager.SetObjectAtPosition(gameObject.transform.position, this);
     }
 
     public void Interact(Interaction action)

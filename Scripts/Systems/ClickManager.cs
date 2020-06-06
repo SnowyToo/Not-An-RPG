@@ -7,6 +7,7 @@ public class ClickManager : MonoBehaviour
 {
     public GameObject click;
 
+    public Item i;
     
     private InteractableObject lastClicked;
     private bool isInteracting;
@@ -21,9 +22,11 @@ public class ClickManager : MonoBehaviour
             cam.orthographicSize -= Input.GetAxisRaw("Mouse ScrollWheel");
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 3, 10);
 
+            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
             if (Input.GetMouseButtonDown(0)) //Left click == Move or Interact
             {
-                Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+                
                 //If we're interacting, we want to stop interacting.
                 if (isInteracting)
                 {
@@ -49,6 +52,13 @@ public class ClickManager : MonoBehaviour
             {
                 //Do Menu
                 GameManager.uiManager.SetUpRightClickMenu(ClickedObject());
+
+                //Debug.Log(GameManager.tilemapManager.GetObjectsAtPosition(mousePos));
+            }
+
+            else if(Input.GetMouseButtonDown(2)) //Middle click = store item
+            {
+                GameManager.tilemapManager.SetObjectAtPosition(mousePos, i);
             }
         }
     }
@@ -57,14 +67,14 @@ public class ClickManager : MonoBehaviour
         //TODO: STORE ITEM IN TILE INSTEAD.
     private InteractableObject ClickedObject()
     {
-        RaycastHit2D hit = Physics2D.Raycast(GameManager.cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        /*RaycastHit2D hit = Physics2D.Raycast(GameManager.cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
         if (hit.collider != null)
         {
             if (hit.transform.tag == "Interactable")
             {
                 return hit.transform.GetComponent<InteractableObject>();
             }
-        }
-        return null;
+        }*/
+        return GameManager.tilemapManager.GetObjectsAtPosition(GameManager.cam.ScreenToWorldPoint(Input.mousePosition))[0] as InteractableObject;
     }
 }

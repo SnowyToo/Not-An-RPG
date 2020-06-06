@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static PlayerMovement playerMovement;
     public static DialogueManager dialogueManager;
     public static QuestManager questManager;
+    public static TilemapManager tilemapManager;
     public static Camera cam;
 
     public PlayerStats debug;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         dialogueManager = GetComponent<DialogueManager>();
         questManager = GetComponent<QuestManager>();
+        tilemapManager = GetComponent<TilemapManager>();
 
 
         //Loading stats
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Load Inventory
+        //inv = new Inventory();
         inv = new Inventory();
 
         debug = stats;

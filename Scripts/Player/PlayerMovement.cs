@@ -35,8 +35,8 @@ public class PlayerMovement : Pathfinding
     //Get the path
     public void GetPath(Vector3 rawDestination)
     {
-        Vector3Int start = GetGridPosition(player.position);
-        Vector3Int destination = GetGridPosition(rawDestination);
+        Vector3Int start = GameManager.tilemapManager.GetGridPosition(player.position);
+        Vector3Int destination = GameManager.tilemapManager.GetGridPosition(rawDestination);
 
         //Make sure pathfinding doesn't get interrupted for null paths.
         //Players who click on unwalkable ties while walking won't be stopped mid-path.
@@ -67,16 +67,11 @@ public class PlayerMovement : Pathfinding
 
     public bool IsNextToObject(InteractableObject o)
     {
-        if (nextTile == GetGridPosition(o.transform.position))
+        if (nextTile == GameManager.tilemapManager.GetGridPosition(o.transform.position))
         {
             path = null;
             return true;
         }
         return false;
-    }
-
-    private Vector3Int GetGridPosition(Vector3 pos)
-    {
-        return new Vector3Int(Mathf.FloorToInt(pos.x + 0.5f), Mathf.FloorToInt(pos.y + 0.5f), 0);
     }
 }

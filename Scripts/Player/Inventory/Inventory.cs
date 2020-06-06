@@ -20,10 +20,10 @@ public class Inventory
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if (items[i].obj == null || (items[i].obj == item && items[i].obj.isStackable))
+            if (items[i].obj == null)
             {
                 //Change Pick Up with Drop
-                item.interactions[0] = item.gameObject.AddComponent<Drop>();
+                //item.interactions[0] = item.gameObject.AddComponent<Drop>();
                 //Add to inv in a very very roundabout way
                 items[i].AddItem(item, count);
                 GameManager.uiManager.UpdateInventory();

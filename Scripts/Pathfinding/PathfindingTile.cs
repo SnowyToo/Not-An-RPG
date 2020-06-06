@@ -9,7 +9,6 @@ using UnityEditor;
 public class PathfindingTile : Tile
 {
     public bool isWalkable;
-    public List<InteractableObject> objectsOnTile;
 
 #if UNITY_EDITOR
     // The following is a helper that adds a menu item to create a RoadTile Asset

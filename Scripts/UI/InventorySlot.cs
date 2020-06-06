@@ -17,12 +17,10 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
         //Get Itemstack
         ItemStack stack = GameManager.inv.items[index];
 
+        Debug.Log(stack.count);
+
         if (data.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("Clicked");
-
-            Debug.Log(stack.obj);
-
             //Show Right-click menu.
             GameManager.uiManager.SetUpRightClickMenu(stack.obj);
         }

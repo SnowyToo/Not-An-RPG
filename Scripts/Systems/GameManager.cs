@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static PlayerStats stats;
     public static Inventory inv;
+    public static Transform player;
 
     public static UIManager uiManager;
     public static ClickManager clickManager;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         cam = Camera.main;
+        player = GameObject.FindWithTag("Player").transform;
+
         uiManager = GetComponent<UIManager>();
         clickManager = GetComponent<ClickManager>();
         playerMovement = GetComponent<PlayerMovement>();

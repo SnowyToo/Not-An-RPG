@@ -20,7 +20,7 @@ public class PlayerMovement : Pathfinding
     private void Start()
     {
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameManager.player;
     }
 
     private void Update()

@@ -18,10 +18,13 @@ public class Inventory
     //Add item at the end of the inventory.
     public void AddItem(Item item, int count)
     {
-        for(int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
             if (items[i].obj == null || (items[i].obj == item && items[i].obj.isStackable))
             {
+                //Change Pick Up with Drop
+                item.interactions[0] = item.gameObject.AddComponent<Drop>();
+                //Add to inv in a very very roundabout way
                 items[i].AddItem(item, count);
                 GameManager.uiManager.UpdateInventory();
                 return;

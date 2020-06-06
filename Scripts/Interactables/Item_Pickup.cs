@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Item_Pickup : Interaction
 {
-    public Item item;
+    private Item item;
 
     private void Start()
     {
@@ -32,11 +32,5 @@ public class Item_Pickup : Interaction
     {
         base.SetParent(_parent);
         item = _parent as Item;
-    }
-
-    public override void Interupt()
-    {
-        base.Interupt();
-        GameManager.dialogueManager.StopDialogue();
     }
 }

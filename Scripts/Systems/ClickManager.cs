@@ -53,7 +53,8 @@ public class ClickManager : MonoBehaviour
         }
     }
 
-    //Get any objects at the cursor position.
+    //Get the top-most object at the cursor position.
+        //TODO: STORE ITEM IN TILE INSTEAD.
     private InteractableObject ClickedObject()
     {
         RaycastHit2D hit = Physics2D.Raycast(GameManager.cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
